@@ -21,7 +21,7 @@ phases:
     commands:
       - echo "Building the Angular application for production..."
       # This generates the compiled files in the 'dist/' directory
-      - ng build --configuration production
+      - npx ng build 
 
   post_build:
     commands:

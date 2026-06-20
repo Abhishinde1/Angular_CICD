@@ -1,38 +1,24 @@
 version: 0.2
-
 phases:
-  install:
-    runtime-versions:
-      nodejs: 22
-    commands:
-      - echo "Node version:"
-      - node -v 
-      - npm -v
-      - npm ci
+ install:
+  runtime-versions:
+   nodejs: 20
+  commands:
+   - echo "Checking node and npm versions..."
+   # - node -v
+   # - npm -v
+   # - echo "Installing dependencies..."
+   - npm ci --legacy-peer-deps
 
-  pre_build:
-    commands:
-      - echo "Running tests (optional but recommended)..."
-      # Uncomment the line below if you have unit tests set up to run headlessly
-      # - npm run test -- --watch=false --browsers=ChromeHeadless
-
-  build:
-    commands:
-      - echo "Building the Angular application for production..."
-      # This generates the compiled files in the 'dist/' directory
-      - npx ng build 
-
-  post_build:
-    commands:
-      - echo "Build completed successfully on `date`"
-
+build:
+ commands:
+  - echo "Building the React application..."
+  - npx ng build
 artifacts:
-  files:
-    - '**/*'
-  # Point this exactly to your build output folder. 
-  # Note: Angular 17+ typically outputs to 'dist/[project-name]/browser'
-  base-directory: 'dist/myapp/browser'
+ files:
+  - '**/*'
+# Use 'dist' if you use Vite, or 'build' if you use Create React App
+base-directory: 'dist/myapp/browser'
+discard-paths: no
 
-cache:
-  paths:
-    - 'node_modules/**/*'
+

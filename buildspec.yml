@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing dependencies..."
+      # Using 'npm ci' is preferred in CI/CD as it's faster and strictly matches package-lock.json
+      - npm ci
+      # Install Angular CLI globally to run build commands
+      - npm install -g @angular/cli
+
+  pre_build:
+    commands:
+      - echo "Running tests (optional but recommended)..."
+      # Uncomment the line below if you have unit tests set up to run headlessly
+      # - npm run test -- --watch=false --browsers=ChromeHeadless
+
+  build:
+    commands:
+      - echo "Building the Angular application for production..."
+      # This generates the compiled files in the 'dist/' directory
+      - ng build --configuration production
+
+  post_build:
+    commands:
+      - echo "Build completed successfully on `date`"
+
+artifacts:
+  files:
+    - '**/*'
+  # Point this exactly to your build output folder. 
+  # Note: Angular 17+ typically outputs to 'dist/[project-name]/browser'
+  base-directory: 'dist/MYAPP/browser'
+
+cache:
+  paths:
+    - 'node_modules/**/*'

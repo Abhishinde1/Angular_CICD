@@ -1,23 +1,24 @@
 version: 0.2
-
 phases:
-  install:
-    runtime-versions:
-      nodejs: 20
-    commands:
-      - echo "Checking node and npm versions..."
-      - node -v
-      - npm -v
-      - echo "Installing dependencies..."
-      - npm ci --legacy-peer-deps
+ install:
+  runtime-versions:
+   nodejs: 18
+  commands:
+   - echo "Checking node and npm versions..."
+   # - node -v
+   # - npm -v
+   # - echo "Installing dependencies..."
+   - npm ci --legacy-peer-deps
 
-  build:
-    commands:
-      - echo "Building the Angular application..."
-      - npx ng build
-
+build:
+ commands:
+  - echo "Building the React application..."
+  - npx ng run build
 artifacts:
-  files:
-    - '**/*'
-  base-directory: 'dist/myapp/browser'
-  discard-paths: no
+ files:
+  - '**/*'
+# Use 'dist' if you use Vite, or 'build' if you use Create React App
+base-directory: 'dist/myapp/browser'
+discard-paths: no
+
+

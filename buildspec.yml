@@ -31,7 +31,7 @@ artifacts:
     - '**/*'
   # Point this exactly to your build output folder. 
   # Note: Angular 17+ typically outputs to 'dist/[project-name]/browser'
-  base-directory: 'dist/MYAPP/browser'
+  base-directory: 'dist/myapp/browser'
 
 cache:
   paths:
